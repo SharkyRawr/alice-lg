@@ -83,6 +83,10 @@ func (self *MultiTableBirdwatcher) fetchReceivedRoutes(neighborId string) (*api.
 	}
 
 	peer := protocols[neighborId].(map[string]interface{})["neighbor_address"].(string)
+  if strings.Contains(peer, "%") {
+    tmp := strings.Split(peer, "%")
+    peer = tmp[0]
+  }
 
 	// Query birdwatcher
 	bird, err := self.client.GetJson("/routes/peer/" + peer)
