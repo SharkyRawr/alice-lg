@@ -115,6 +115,11 @@ func (src *MultiTableBirdwatcher) fetchReceivedRoutes(
 	table := protocols[neighborID].(map[string]interface{})["table"].(string)
 	pipe := src.getMasterPipeName(table)
 
+	if strings.Contains(peer, "%") {
+		tmp := strings.Split(peer, "%")
+		peer = tmp[0]
+	}
+
 	qryURL := "/routes/peer/" + peer
 	if src.isAltSession(pipe) {
 		qryURL = "/routes/table/" + table + "/peer/" + peer
