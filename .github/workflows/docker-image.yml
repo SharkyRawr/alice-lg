@@ -8,7 +8,7 @@ on:
 
 env:
   REGISTRY: ghcr.io
-  #IMAGE_NAME: ${{ github.repository }} # lower-case needed, added an action secret to replace this.
+  IMAGE_NAME: ${{ env.IMAGE_NAME }} # lower-case needed, added an action secret to replace this.
 
 jobs:
 
